@@ -1,8 +1,9 @@
+// BASIC CONFIG
 .header{
     width: 100%;
     min-height: 60px;
-    background-color: black;
-    height: 60px;
+    background-color: var(--primary_color);
+    height: 70px;
     padding: 0px 40px;
 }
 .header_content{
@@ -10,17 +11,18 @@
     display: flex;
     align-items: center;
 }
-
 a{
-    color: #ffc107;
+    color: #FFFF;
     text-decoration: none;
 }
+// END BASIC CONFIG
 
-
-
+// HEADER OPTIONS
 .header_options{
     width: fit-content;
     margin-left: auto;
+    margin-right: 0%;
+    // OPTIONS CONFIG
     .nav_menu{
         list-style: none;
         display: flex;
@@ -30,41 +32,165 @@ a{
             white-space: nowrap;
             padding: 10px 20px;
             a{
+                opacity: 0;
                 display: block;
                 position: relative;
                 color: white;
                 transition: 0.4s;
-                font-size: 15px;
-                font-family: "Roboto", sans-serif;
+                font-size: 18px;
+                font-weight: 400;
+                font-family: var(--font_family);
                 padding: 0 5px;
-                text-transform: uppercase;
-                
             }
             a::before{
                 content: "";
                 position: absolute;
                 width: 0px;
-                height: 2px;
-                bottom: -6px;
+                height: 1px;
+                bottom: -5px;
                 left: 0;
-                background-color: #ffc107;
+                background-color: #FFFF;
                 visibility: hidden;
                 transition: all 0.3s ease-in-out;
-            }
+                box-shadow: 0 0 8px var(--color_2), 0 0 2px var(--color_2), 0 0 10px var(--color_2), 0 0 6px var(--color_2), 0 0 20px var(--color_2), 0 0 20px var(--color_2), 0 0 1px var(--color_2), 0 0 12px var(--color_2);
+            } 
         }
     }
-
+    /// OPTIONS FALLING DOWN EFECTS
+    @for $i from 1 to 5 {
+        .nav_menu li:nth-child(#{$i}) a{
+            animation: falling 0.75s ease-in-out $i*0.25s-0.25s forwards;
+        }
+    }
+    @keyframes falling {
+        from{
+            transform: translateY(-50px);
+        }
+        to{
+            transform: translateY(0px);
+            opacity: 1;
+        }
+    }
+    /// OPTIONS HOVER EFECTS
     .nav_menu a:hover::before,
     .nav_menu li:hover > a::before,
     .nav_menu .active >a::before{
         visibility: visible;
-        width: 100%;
-        
+        width: 100%;  
     }
-
+    /// OPTIONS HOVER NEON EFECTS
     .nav_menu li:hover > a,
     .nav_menu .active >a{
-        text-shadow: 0 0 8px #f0ad4e, 0 0 2px #f0ad4e, 0 0 10px #f0ad4e, 0 0 6px #f0ad4e, 0 0 20px #f0ad4e, 0 0 20px #f0ad4e, 0 0 1px #f0ad4e, 0 0 12px #f0ad4e;
+        text-shadow: 0 0 8px var(--color_2), 0 0 2px var(--color_2), 0 0 10px var(--color_2), 0 0 6px var(--color_2), 0 0 20px var(--color_2), 0 0 20px var(--color_2), 0 0 1px var(--color_2), 0 0 12px var(--color_2);
     }
 
+  
+}
+//HEADER OPTIONS END
+
+//HEADER LOGO
+.logo{
+    // cursor: pointer;
+    height: 50px;
+    width: 50px;
+    opacity: 0;
+    animation: logoAnimation 0.5s ease-in-out 1s forwards;
+    svg{
+        path{
+            stroke: white;
+        }
+        text{
+            fill: white;
+            text-shadow: 3px 0 8px var(--color_2), 3px 0 2px var(--color_2), 3px 0 10px var(--color_2), 3px 0 6px var(--color_2), 3px 0 20px var(--color_2), 3px 0 20px var(--color_2), 0px 0 1px var(--color_2), 3px 0 12px var(--color_2);
+        }
+    }
+}
+// LOGO BENNING ANIMATION
+@keyframes logoAnimation {
+    to{
+        opacity: 1;
+    }
+}
+//HEADER LOGO ENDS
+
+// THREE LINES LOGO
+
+.three_lines {
+    cursor: pointer;
+    display: none;
+    .line{
+        height: 2px;
+        width: 25px;
+        margin: 6px 0px;
+        background-color: white;
+        box-shadow: 0 0 4px var(--color_2), 0 0 1px var(--color_2), 0 0 5px var(--color_2), 0 0 3px var(--color_2), 0 0 10px var(--color_2), 0 0 10px var(--color_2), 0 0 1px var(--color_2), 0 0 6px var(--color_2);
+    }
+}
+
+//RESPONSIVE CONFIG
+@media (max-width : 768px) {
+    .three_lines{
+        display: block;
+        opacity: 0;
+        margin-left: auto;
+        animation: threeLinesAnimation 0.5s ease-in-out 0.5s forwards;
+    }
+    .logo{
+        animation: logoAnimation 0.5s ease-in-out 0.5s forwards;
+    }
+    @keyframes threeLinesAnimation {
+        to{
+            opacity: 1;
+        }
+    }
+    .header_options{
+        overflow-x: hidden;
+        .nav_menu{
+            position: absolute;
+            right: 0px;
+            width: 50%;
+            height: fit-content;
+            top:70px;
+            background-color: var(--primary_color);
+            background-color: rgba(0,0,0, 0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0px;
+            transform: translateY(-100%);
+            transition-property: transform;
+            transition-duration: 0.5s;
+            transition-timing-function: ease-in-out;
+            // display: none;
+        }
+        .nav_menu li{
+            opacity: 0;
+        }
+        .nav-active{
+            transform: translateY(0%);
+            // display: flex;
+        }
+    }
+
+    .header{
+        padding: 0px 20px;
+    }
+    .nav_menu .active >a{
+        text-shadow: none;
+    }
+    a::before{
+        display: none;
+        animation:navOptFadeAnimation 2s ease-in 1 forwards;
+    }
+}
+
+@keyframes navOptFadeAnimation {
+    from{
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0px);
+    }
 }
