@@ -1,1 +1,10 @@
-<p>home works!</p>
+<div class="home">
+    <div class="home_container" id="home_container">
+    </div>
+    <div class="hexagons_container">
+        <div class="interal-ring"></div>
+        <div *ngFor = "let hexagonRow of hexagonsArrayRow; index as i" class="hexagon_row">
+            <div *ngFor = "let hexagonColumn of hexagonsArrayColumn; index as j" class="hexagon"></div>
+        </div>
+    </div>
+</div>

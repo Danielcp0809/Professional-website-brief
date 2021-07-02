@@ -19,7 +19,6 @@ export class HeaderComponent implements OnInit {
       burger.addEventListener('click', ()=>{
         nav.classList.toggle('nav-active');
         navOptions.forEach((link,index) => {
-          console.log(nav.classList.contains('nav-active'))
           if(nav.classList.contains('nav-active')){
             let style = `animation:navOptFadeAnimation 0.5s ease forwards ${index / 7 + 0.5}s;`
             link.setAttribute('style', style)
